@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
             $table->string('content');
-            $table->string('image'); //c'est en réalité le chemin de fichier vers le dossier storage/public
+            $table->string('image')->nullable(); //c'est en réalité le nom du fichier qui sera stocker dans le dossier storage/public
             $table->foreignId('story_id')->constrained('stories')->onDelete('cascade');
             $table->timestamps();
         });
