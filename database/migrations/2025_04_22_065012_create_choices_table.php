@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
+            $table->string('text');
+            $table->foreignId('chapter_id')->constrained('chapters')->onDelete('cascade'); // Relation avec chapters
+            $table->foreignId('next_chapter_id')->nullable()->constrained('chapters')->onDelete('set null'); // Relation avec le chapitre suivant
             $table->timestamps();
         });
     }
