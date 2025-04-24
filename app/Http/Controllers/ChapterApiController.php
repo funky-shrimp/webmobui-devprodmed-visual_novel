@@ -17,6 +17,10 @@ class ChapterApiController extends Controller
         return response()->json(Chapter::findOrFail($id));
     }
 
+    public function getChaptersByStory($story_id){
+        return response()->json(Chapter::where('story_id', $story_id)->get());
+    }
+
     public function createChapter(ChapterStoreRequest $request){
         $chapter = Chapter::create($request->validated());
         return response()->json($chapter,201);

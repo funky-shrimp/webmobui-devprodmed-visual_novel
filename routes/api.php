@@ -20,6 +20,7 @@ Route::get('chapters/{id}',[ChapterApiController::class,'getChapter']);
 Route::post('chapters',[ChapterApiController::class,'createChapter']);
 Route::put('chapters/{id}',[ChapterApiController::class,'updateChapter']);
 Route::delete('chapters/{id}',[ChapterApiController::class,'deleteChapter']);
+Route::get('chapters/story/{story_id}',[ChapterApiController::class,'getChaptersByStory']);
 
 /* Routes for Choices */
 Route::get('choices',[ChoiceApiController::class,'getchoices']);
