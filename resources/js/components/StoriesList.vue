@@ -1,5 +1,5 @@
 <script setup>
-import {defineProps} from "vue"
+import {defineProps, defineEmits} from "vue"
 
 defineProps({
     stories: {
@@ -7,6 +7,8 @@ defineProps({
     default: () => [],
   },
 })
+
+defineEmits(['delete'])
 
 </script>
 <template>
@@ -17,9 +19,9 @@ defineProps({
     <tr v-for="story in stories">
         <td>{{story.title}}</td>
         <td>
-            <button>Play</button>
-            <button>Edit</button>
-            <button>Delete</button>
+            <a :href="'#game-' + story.id">Play</a>
+            <a :href="'#edit-' + story.id">Edit</a>
+            <a href="" @click.prevent="$emit('delete',story.id)">Delete</a>
         </td>
     </tr>
 </table>
@@ -36,19 +38,6 @@ table{
 td{
     margin:0;
     padding: 8px;
-}
-
-button{
-    margin: 0 10px 0 10px;
-    background-color: rgb(160, 160, 254);
-    border-style: none;
-    border-radius: 10px;
-    padding:10px;
-    color:rgb(0, 0, 0);
-}
-
-button:hover{
-    background-color: rgb(97, 97, 255);
 }
 
 tr:nth-child(even){
