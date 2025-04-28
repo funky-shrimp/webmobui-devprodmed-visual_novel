@@ -33,7 +33,7 @@ export function createStory(story) {
 }
 
 export function getStoryChapters(id) {
-    const { data, error, isLoading } = useFetchJson("/api/chapters/story/" + id);
+    const { data, error, isLoading } = useFetchJson("/api/stories/" + id+"/chapters");
     return { data, error, isLoading };
 }
 
