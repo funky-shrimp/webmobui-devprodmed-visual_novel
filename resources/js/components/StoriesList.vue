@@ -10,11 +10,15 @@ defineProps({
 
 defineEmits(['delete'])
 
+const createStory = () => {
+    window.location.href=`#create`;
+}
+
 </script>
 <template>
 
 <h1>Stories List</h1>
-
+<button id="createStory" @click="createStory">Create a story</button>
 <table>
     <tr v-for="story in stories">
         <td>{{story.title}}</td>

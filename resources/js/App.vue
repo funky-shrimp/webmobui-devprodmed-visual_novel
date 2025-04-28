@@ -8,6 +8,7 @@ import Game from "./pages/Game.vue";
 const routes = {
     "/": Home,
     "edit": EditStory,
+    "create": EditStory,
     "game": Game,
 }
 
