@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChapterStoreRequest;
 use App\Http\Requests\ChapterUpdateRequest;
 use App\Models\Chapter;
+use App\Models\Choice;
 use Illuminate\Http\Request;
 
 class ChapterApiController extends Controller
@@ -17,8 +18,9 @@ class ChapterApiController extends Controller
         return response()->json(Chapter::findOrFail($id));
     }
 
-    public function getChaptersByStory($story_id){
-        return response()->json(Chapter::where('story_id', $story_id)->get());
+    public function getChoicesByChapter($chapter_id){
+        return response()->json(Choice::where("chapter_id",
+        $chapter_id)->get());
     }
 
     public function createChapter(ChapterStoreRequest $request){

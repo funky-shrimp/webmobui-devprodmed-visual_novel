@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoryStoreRequest;
 use App\Http\Requests\StoryUpdateRequest;
 use App\Models\Story;
+use App\Models\Chapter;
 use Illuminate\Http\Request;
 
 class StoryApiController extends Controller
@@ -18,6 +19,10 @@ class StoryApiController extends Controller
 
     public function getStory($id){
         return response()->json(Story::findOrFail($id));
+    }
+
+    public function getChaptersByStory($story_id){
+        return response()->json(Chapter::where('story_id', $story_id)->get());
     }
 
     public function createStory(StoryStoreRequest $request){
