@@ -27,3 +27,17 @@ export function updateStory(id, story) {
     });
     return { data, error, isLoading };
 }
+
+export function createStory(story) {
+
+}
+
+export function getStoryChapters(id) {
+    const { data, error, isLoading } = useFetchJson("/api/stories/" + id+"/chapters");
+    return { data, error, isLoading };
+}
+
+export function getChapterChoices(id){
+    const { data, error, isLoading } = useFetchJson("/api/chapters/" + id + "/choices");
+    return { data, error, isLoading };
+}

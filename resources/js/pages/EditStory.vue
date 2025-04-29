@@ -1,6 +1,10 @@
 <script setup>
 import { ref, watch } from "vue";
-import { getStory, updateStory } from "../lib/StoriesManager.js";
+import {
+    getStory,
+    updateStory,
+    getStoryChapters,
+} from "../lib/StoriesManager.js";
 import TheStoryForm from "../components/Forms/TheStoryForm.vue";
 import TheChapterForm from "../components/Forms/TheChapterForm.vue";
 import TheChoiceForm from "../components/Forms/TheChoiceForm.vue";
@@ -19,8 +23,19 @@ const story = ref({
 });
 
 const chapterForms = ref([]);
+const choiceForms = ref([]);
 
-const { data, error, loading } = getStory(storyId);
+const {
+    data: storyData,
+    error: storyError,
+    loading: storyLoading,
+} = getStory(storyId);
+
+const {
+    data: chaptersData,
+    error: chaptersError,
+    loading: chaptersLoading,
+} = getStoryChapters(storyId);
 
 function updateStoryInfo() {
     //Prevent useless update
@@ -53,12 +68,39 @@ function addChapterForm() {
     });
 }
 
-watch(data, (newData) => {
+function addChoiceForm() {
+    choiceForms.value.push({
+        text: "",
+        nextChapterId: null,
+        chapters : [],
+    });
+}
+
+watch(storyData, (newData) => {
     initialStory.title = newData.title;
     initialStory.summary = newData.summary;
     story.value.title = newData.title;
     story.value.summary = newData.summary;
 });
+
+watch(chaptersData, (newData) => {
+    console.log(newData);
+
+    newData.forEach((chapter) => {
+        chapterForms.value.push({
+            id: chapter.id,
+            content: chapter.content,
+            image: chapter.image,
+            mode: "update",
+        });
+    });
+});
+
+
+function checkChaptersData(form){
+    console.log(form);
+}
+
 </script>
 <template>
     <h1>Edit Story</h1>
@@ -70,9 +112,15 @@ watch(data, (newData) => {
         <h2>Chapters</h2>
         <button id="chapterAdd" @click="addChapterForm">Add Chapter</button>
         <div v-for="form in chapterForms" :key="form.id">
-            <TheChapterForm :storyId="storyId" :mode="form.mode" />
+            <TheChapterForm :chapter="form" @update="checkChaptersData(form)"/>
         </div>
     </div>
-
+    <div id="choicesInfo">
+        <h2>Choices</h2>
+        <button id="choiceAdd" @click="addChoiceForm">Add Choice</button>
+        <div v-for="form in choiceForms" :key="form.id">
+            <TheChoiceForm :choice="form" />
+        </div>
+    </div>
 </template>
 <style scoped></style>
