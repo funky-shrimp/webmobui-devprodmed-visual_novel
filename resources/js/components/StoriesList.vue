@@ -1,5 +1,6 @@
 <script setup>
 import {defineProps, defineEmits} from "vue"
+import { RouterLink } from "vue-router"
 
 defineProps({
     stories: {
@@ -11,7 +12,7 @@ defineProps({
 defineEmits(['delete'])
 
 const createStory = () => {
-    window.location.href=`#create`;
+    //window.location.href=`#create`;
 }
 
 </script>
@@ -24,7 +25,8 @@ const createStory = () => {
         <td>{{story.title}}</td>
         <td>
             <a :href="'#game-' + story.id">Play</a>
-            <a :href="'#edit-' + story.id">Edit</a>
+            <RouterLink :to="'/edit/' + story.id">Edit</RouterLink>
+            <!--<a :href="'#edit-' + story.id">Edit</a>-->
             <a href="" @click.prevent="$emit('delete',story.id)">Delete</a>
         </td>
     </tr>
@@ -32,8 +34,6 @@ const createStory = () => {
 
 </template>
 <style scoped>
-
-
 table{
     margin: auto;
     width:70%;

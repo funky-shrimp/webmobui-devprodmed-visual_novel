@@ -1,7 +1,7 @@
 <script setup>
-import StoriesList from "../components/StoriesList.vue";
+import StoriesList from "@/components/StoriesList.vue";
 import { ref, watch } from "vue";
-import { getStories, deleteStory } from "../lib/StoriesManager.js";
+import { getStories, deleteStory } from "@/lib/StoriesManager.js";
 
 const stories = ref();
 
@@ -32,4 +32,7 @@ function clickDelete(id) {
         @delete="clickDelete"
     ></StoriesList>
 </template>
-<style scoped></style>
+<style scoped>
+
+
+</style>

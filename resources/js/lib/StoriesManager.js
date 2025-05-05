@@ -1,4 +1,4 @@
-import { useFetchJson } from "../composables/useFetchJson";
+import { useFetchJson } from "@/composables/useFetchJson";
 
 export function getStories() {
     const { data, error, isLoading } = useFetchJson("/api/stories");
@@ -37,7 +37,20 @@ export function getStoryChapters(id) {
     return { data, error, isLoading };
 }
 
+
+
+export function getChapter(id){
+    const { data, error, isLoading } = useFetchJson("/api/chapters/" + id);
+    return { data, error, isLoading };
+}
+
 export function getChapterChoices(id){
     const { data, error, isLoading } = useFetchJson("/api/chapters/" + id + "/choices");
+    return { data, error, isLoading };
+}
+
+
+export function getChoice(id){
+    const { data, error, isLoading } = useFetchJson("/api/choices/" + id);
     return { data, error, isLoading };
 }
