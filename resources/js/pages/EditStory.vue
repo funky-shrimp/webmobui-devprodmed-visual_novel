@@ -4,6 +4,8 @@ import {
     getStory,
     updateStory,
     getStoryChapters,
+    createChapter,
+    deleteChapter,
 } from "@/lib/StoriesManager.js";
 
 import TheStoryForm from "@/components/Forms/TheStoryForm.vue";
@@ -46,8 +48,6 @@ function updateStoryInfo() {
         return;
     }
 
-
-
     const { data, error, loading } = updateStory(storyId, story.value);
 
     watch(data, (newData) => {
@@ -61,7 +61,46 @@ function updateStoryInfo() {
             alert("Error updating story: " + newError.data.message);
         }
     });
-    
+}
+
+function createDummyChapter() {
+    const dummyChapter = {
+        content: "Dummy Chapter",
+        story_id: storyId,
+    };
+
+    const {
+        data: dummyChapterData,
+        error: dummyChapterError,
+        loading: dummyChapterLoading,
+    } = createChapter(dummyChapter);
+
+    watch(dummyChapterData, (newDummyChapterData) => {
+        if (newDummyChapterData) {
+            console.log(
+                "Dummy chapter created successfully:",
+                newDummyChapterData
+            );
+            chapters.value.push(newDummyChapterData);
+        }
+    });
+}
+
+function deleteChapterClick(chapterId) {
+    if (confirm("Are you sure you want to delete this Chapter ?")) {
+        const { data, error, loading } = deleteChapter(chapterId);
+
+        watch(error, (newError) => {
+            if (newError) {
+                if (newError.status === 204) {
+                    console.log("Chapter deleted successfully");
+                    chapters.value = chapters.value.filter(
+                        (chapter) => chapter.id !== chapterId
+                    );
+                }
+            }
+        });
+    }
 }
 
 watch(storyData, (newData) => {
@@ -74,7 +113,6 @@ watch(storyData, (newData) => {
 watch(chaptersData, (newData) => {
     chapters.value = newData;
 });
-
 </script>
 <template>
     <h1>Edit Story</h1>
@@ -82,6 +120,10 @@ watch(chaptersData, (newData) => {
         <h2>Story Info</h2>
         <TheStoryForm v-model="story" @update="updateStoryInfo" />
     </div>
-    <ChaptersList :chapters="chapters" />
+    <ChaptersList
+        :chapters="chapters"
+        @createChapter="createDummyChapter"
+        @deleteChapter="deleteChapterClick"
+    />
 </template>
 <style scoped></style>

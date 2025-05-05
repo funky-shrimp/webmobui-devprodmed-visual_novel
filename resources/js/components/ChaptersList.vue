@@ -13,17 +13,19 @@ const { chapters} = defineProps({
     },
 });
 
+defineEmits(['deleteChapter','createChapter'])
+
 </script>
 <template>
     <h1>Chapters List</h1>
-    <button id="createChapter">Create a Chapter</button>
+    <button id="createChapter" @click.prevent="$emit('createChapter')">Create a Chapter</button>
     <table>
         <tr v-for="chapter in chapters">
             <td>{{ chapter.id }}</td>
             <td>{{ chapter.content }}</td>
             <td>
                 <RouterLink :to="'/edit/' + storyId + '/'+chapter.id">Edit</RouterLink>
-                <a href="">Delete</a>
+                <a href="" @click.prevent="$emit('deleteChapter',chapter.id)">Delete</a>
             </td>
         </tr>
     </table>

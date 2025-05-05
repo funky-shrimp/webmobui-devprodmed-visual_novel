@@ -1,7 +1,12 @@
 <script setup>
 import { ref, watch, inject } from "vue";
 
-import { getChapter, getChapterChoices } from "@/lib/StoriesManager.js";
+import {
+    getChapter,
+    getChapterChoices,
+    createChoice,
+    deleteChoice,
+} from "@/lib/StoriesManager.js";
 
 import TheChapterForm from "@/components/Forms/TheChapterForm.vue";
 import ChoicesList from "@/components/ChoicesList.vue";
@@ -29,6 +34,47 @@ const {
     loading: choicesLoading,
 } = getChapterChoices(chapterId);
 
+function createDummyChoice() {
+    const dummyChoice = {
+        text: "Dummy Choice",
+        chapter_id: chapterId,
+        next_chapter_id: null,
+    };
+
+    const {
+        data: dummyChoiceData,
+        error: dummyChoiceError,
+        loading: dummyChoiceLoading,
+    } = createChoice(dummyChoice);
+
+    watch(dummyChoiceData, (newDummyChoiceData) => {
+        if (newDummyChoiceData) {
+            console.log(
+                "Dummy chapter created successfully:",
+                newDummyChoiceData
+            );
+            choices.value.push(newDummyChoiceData);
+        }
+    });
+}
+
+function deleteChoiceClick(choiceId) {
+    if (confirm("Are you sure you want to delete this Choice ?")) {
+        const { data, error, loading } = deleteChoice(choiceId);
+
+        watch(error, (newError) => {
+            if (newError) {
+                if (newError.status === 204) {
+                    console.log("Chapter deleted successfully");
+                    choices.value = choices.value.filter(
+                        (choice) => choice.id !== choiceId
+                    );
+                }
+            }
+        });
+    }
+}
+
 watch(chapterData, (newChapter) => {
     if (newChapter) {
         chapter.value = newChapter;
@@ -40,13 +86,16 @@ watch(choicesData, (newChoices) => {
         choices.value = newChoices;
     }
 });
-
 </script>
 <template>
     <div id="chaptersInfo">
         <h2>Chapters</h2>
         <TheChapterForm :chapter="chapter" />
     </div>
-    <ChoicesList :choices="choices" />
+    <ChoicesList
+        :choices="choices"
+        @createChoice="createDummyChoice"
+        @deleteChoice="deleteChoiceClick"
+    />
 </template>
 <style scoped></style>

@@ -1,5 +1,7 @@
 import { useFetchJson } from "@/composables/useFetchJson";
 
+/* ___ STORIES ___ */
+
 export function getStories() {
     const { data, error, isLoading } = useFetchJson("/api/stories");
     return { data, error, isLoading };
@@ -7,6 +9,13 @@ export function getStories() {
 
 export function getStory(id) {
     const { data, error, isLoading } = useFetchJson("/api/stories/" + id);
+    return { data, error, isLoading };
+}
+
+export function getStoryChapters(id) {
+    const { data, error, isLoading } = useFetchJson(
+        "/api/stories/" + id + "/chapters"
+    );
     return { data, error, isLoading };
 }
 
@@ -19,7 +28,7 @@ export function deleteStory(id) {
 }
 
 export function updateStory(id, story) {
-    console.log(story)
+    console.log(story);
     const { data, error, isLoading } = useFetchJson({
         url: "/api/stories/" + id,
         method: "PUT",
@@ -29,28 +38,90 @@ export function updateStory(id, story) {
 }
 
 export function createStory(story) {
-
-}
-
-export function getStoryChapters(id) {
-    const { data, error, isLoading } = useFetchJson("/api/stories/" + id+"/chapters");
+    const { data, error, isLoading } = useFetchJson({
+        url: "/api/stories",
+        method: "POST",
+        data: { title: story.title, summary: story.summary },
+    });
     return { data, error, isLoading };
 }
 
+/* ___ CHAPTERS ___ */
 
-
-export function getChapter(id){
+export function getChapter(id) {
     const { data, error, isLoading } = useFetchJson("/api/chapters/" + id);
     return { data, error, isLoading };
 }
 
-export function getChapterChoices(id){
-    const { data, error, isLoading } = useFetchJson("/api/chapters/" + id + "/choices");
+export function getChapterChoices(id) {
+    const { data, error, isLoading } = useFetchJson(
+        "/api/chapters/" + id + "/choices"
+    );
     return { data, error, isLoading };
 }
 
+export function createChapter(chapter) {
+    const { data, error, isLoading } = useFetchJson({
+        url: "/api/chapters",
+        method: "POST",
+        data: { content: chapter.content, story_id: chapter.story_id },
+    });
+    return { data, error, isLoading };
+}
 
-export function getChoice(id){
+export function deleteChapter(id) {
+    const { data, error, isLoading } = useFetchJson({
+        url: "/api/chapters/" + id,
+        method: "DELETE",
+    });
+    return { data, error, isLoading };
+}
+
+export function updateChapter(id, chapter) {
+    const { data, error, isLoading } = useFetchJson({
+        url: "/api/chapters/" + id,
+        method: "PUT",
+        data: { content: chapter.content, image: chapter.image },
+    });
+    return { data, error, isLoading };
+}
+
+/* ___ CHOICES ___ */
+
+export function getChoice(id) {
     const { data, error, isLoading } = useFetchJson("/api/choices/" + id);
+    return { data, error, isLoading };
+}
+
+export function createChoice(choice) {
+    const { data, error, isLoading } = useFetchJson({
+        url: "/api/choices",
+        method: "POST",
+        data: {
+            text: choice.text,
+            chapter_id: choice.chapter_id,
+            next_chapter_id: choice.next_chapter_id,
+        },
+    });
+    return { data, error, isLoading };
+}
+
+export function deleteChoice(id) {
+    const { data, error, isLoading } = useFetchJson({
+        url: "/api/choices/" + id,
+        method: "DELETE",
+    });
+    return { data, error, isLoading };
+}
+
+export function updateChoice(id, choice) {
+    const { data, error, isLoading } = useFetchJson({
+        url: "/api/choices/" + id,
+        method: "PUT",
+        data: {
+            text: choice.text,
+            next_chapter_id: choice.next_chapter_id,
+        },
+    });
     return { data, error, isLoading };
 }
