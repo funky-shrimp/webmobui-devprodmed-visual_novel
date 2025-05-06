@@ -77,10 +77,6 @@ function createDummyChapter() {
 
     watch(dummyChapterData, (newDummyChapterData) => {
         if (newDummyChapterData) {
-            console.log(
-                "Dummy chapter created successfully:",
-                newDummyChapterData
-            );
             chapters.value.push(newDummyChapterData);
         }
     });
@@ -93,7 +89,6 @@ function deleteChapterClick(chapterId) {
         watch(error, (newError) => {
             if (newError) {
                 if (newError.status === 204) {
-                    console.log("Chapter deleted successfully");
                     chapters.value = chapters.value.filter(
                         (chapter) => chapter.id !== chapterId
                     );
