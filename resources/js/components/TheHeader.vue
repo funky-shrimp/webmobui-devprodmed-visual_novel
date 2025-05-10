@@ -2,7 +2,7 @@
 <template>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
+        <li class="admin"><a href="admin">Admin</a></li>
     </ul>
 </template>
 <style scoped>
@@ -24,6 +24,10 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+}
+
+li.admin{
+    float:right;
 }
 
 li a:hover:not(.active) {
