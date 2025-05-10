@@ -12,6 +12,8 @@ const { choice, availableChapters } = defineProps({
         required: true,
     },
 });
+
+defineEmits(["update"]);
 </script>
 <template>
     <form class="choiceForm" href="" @submit.prevent="$emit('update')">
@@ -27,16 +29,18 @@ const { choice, availableChapters } = defineProps({
         </div>
         <div>
             <label for="nextChapter">Next Chapter</label>
+            <!-- have the choice.next_chapter_id selected-->
             <select
                 id="nextChapter"
                 name="nextChapter"
-                v-model="choice.nextChapter"
+                v-model="choice.next_chapter_id"                
             >
-            <option value="">None (end of story)</option>
+                <option value="">None (end of story)</option>
                 <option
                     v-for="chapter in availableChapters"
                     :key="chapter.id"
                     :value="chapter.id"
+                    
                 >
                     {{ chapter.content }}
                 </option>

@@ -27,7 +27,7 @@ defineEmits(["deleteChoice", "createChoice"]);
             <td>{{ choice.next_chapter_id }}</td>
             <td>
                 <RouterLink
-                    :to="'/edit/' + storyId + '/' + chapterId + '/' + choiceId"
+                    :to="'/edit/' + storyId + '/' + chapterId + '/' + choice.id"
                     >Edit</RouterLink
                 >
                 <a href="" @click.prevent="$emit('deleteChoice',choice.id)">Delete</a>

@@ -23,12 +23,14 @@ const {
 
 function setCurrentChapter(chapterId) {
     console.log("Setting current chapter to:", chapterId);
-    if(chapterId == null) {
+    if (chapterId == null) {
         console.log("Chapter ID is null, ending the game.");
         end.value = true;
         return;
     }
-    const nextChapter = chapters.value.find((chapter) => chapter.id === chapterId);
+    const nextChapter = chapters.value.find(
+        (chapter) => chapter.id === chapterId
+    );
     if (nextChapter) {
         currentChapter.value = nextChapter;
     }
@@ -61,6 +63,12 @@ watch(currentChapter, (newChapter) => {
     <div v-else-if="currentChapter && !end">
         <h1>{{ currentChapter.title }}</h1>
         <p class="chaptersContent">{{ currentChapter.content }}</p>
+        <div class="chaptersImage" v-if="currentChapter.image">
+            <img
+                :src="`/storage/${currentChapter.image}`"
+                alt="Chapter Image"
+            />
+        </div>
         <div class="choices">
             <ul>
                 <li v-for="choice in choices" :key="choice.id">
@@ -78,4 +86,8 @@ watch(currentChapter, (newChapter) => {
         <RouterLink :to="'/'">Go back home now !!!</RouterLink>
     </div>
 </template>
-<style scoped></style>
+<style scoped>
+    img{
+        width:100px;
+    }
+</style>

@@ -145,6 +145,9 @@ export function deleteChoice(id) {
 }
 
 export function updateChoice(id, choice) {
+    if(choice.next_chapter_id === "") {
+        choice.next_chapter_id = null;
+    }
     const { data, error, isLoading } = useFetchJson({
         url: "/api/choices/" + id,
         method: "PUT",

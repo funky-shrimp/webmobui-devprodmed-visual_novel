@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, inject, computed } from "vue";
 import TheChoiceForm from "@/components/Forms/TheChoiceForm.vue";
-import { getChoice, getStoryChapters } from "@/lib/StoriesManager.js";
+import { getChoice, getStoryChapters, updateChoice } from "@/lib/StoriesManager.js";
 
 const route = inject("route");
 const storyId = route.params.storyId;
@@ -24,6 +24,22 @@ const {
     loading: availableChaptersLoading,
 } = getStoryChapters(storyId);
 
+function updateChoiceInfo() {
+    const { data, error, loading } = updateChoice(choiceId, choice.value);
+
+    watch(data, (newData) => {
+        if (newData) {
+            console.log("updated");
+        }
+    });
+    watch(error, (newError) => {
+        console.log(newError);
+        if (newError) {
+            console.error("Error updating choice:", newError);
+        }
+    });
+}
+
 watch(choiceData, (newChoice) => {
     if (newChoice) {
         choice.value = newChoice;
@@ -41,6 +57,6 @@ watch(availableChaptersData, (newAvailableChapters) => {
 </script>
 <template>
     <h1>Edit Choice</h1>
-    <TheChoiceForm :choice="choice" :availableChapters="availableChapters" />
+    <TheChoiceForm :choice="choice" :availableChapters="availableChapters" @update="updateChoiceInfo" />
 </template>
 <style scoped></style>
