@@ -4,7 +4,8 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "serve": "start php artisan serve && npm run dev"
+        "serve": "start php artisan serve && npm run dev",
+        "clear-cache": "php artisan optimize:clear"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -15,6 +16,7 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
-        "@vitejs/plugin-vue": "^5.2.3"
+        "@vitejs/plugin-vue": "^5.2.3",
+        "vue-router": "^4.5.1"
     }
 }

@@ -1,17 +1,20 @@
 <script setup>
-import StoriesList from "../components/StoriesList.vue";
+import StoriesList from "@/components/StoriesList.vue";
 import { ref, watch } from "vue";
-import { getStories, deleteStory } from "../lib/StoriesManager.js";
+import { getStories, deleteStory, createStory } from "@/lib/StoriesManager.js";
 
 const stories = ref();
 
-const { data, error, loading } = getStories();
+const {
+    data: storiesData,
+    error: storiesError,
+    loading: storiesLoading,
+} = getStories();
 
-watch(data, (newData) => {
-    stories.value = newData;
+watch(storiesData, (newStoriesData) => {
+    stories.value = newStoriesData;
     console.log(stories.value);
 });
-
 
 function clickDelete(id) {
     if (confirm("Are you sure you want to delete this story?")) {
@@ -25,11 +28,32 @@ function clickDelete(id) {
         }
     }
 }
+
+function createDummyStory() {
+    const dummyStory = {
+        title: "Dummy Story",
+        summary: "This is a dummy story.",
+    };
+    
+    const {
+        data: dummyStoryData,
+        error: dummyStoryError,
+        loading: dummyStoryLoading,
+    } = createStory(dummyStory);
+
+    watch(dummyStoryData, (newDummyStoryData) => {
+        if (newDummyStoryData) {
+            console.log("Dummy story created successfully:", newDummyStoryData);
+            stories.value.push(newDummyStoryData);
+        }
+    });
+}
 </script>
 <template>
     <StoriesList
         :stories="stories"
         @delete="clickDelete"
+        @createStory="createDummyStory"
     ></StoriesList>
 </template>
 <style scoped></style>
