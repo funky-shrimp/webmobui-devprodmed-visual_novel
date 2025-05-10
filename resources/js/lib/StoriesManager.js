@@ -77,12 +77,42 @@ export function deleteChapter(id) {
     return { data, error, isLoading };
 }
 
-export function updateChapter(id, chapter) {
+/*
+export function updateStory(id, story) {
+    console.log(story);
     const { data, error, isLoading } = useFetchJson({
-        url: "/api/chapters/" + id,
+        url: "/api/stories/" + id,
         method: "PUT",
-        data: { content: chapter.content, image: chapter.image },
+        data: { title: story.title, summary: story.summary },
     });
+    return { data, error, isLoading };
+}
+*/
+
+export async function updateChapter(id, chapter) {
+    let base64Image = null;
+
+    if (chapter.image instanceof File) {
+        base64Image = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(chapter.image); // Convert the image to Base64
+        });
+    }
+
+    const { data, error, isLoading } = useFetchJson({
+        url: `/api/chapters/${id}`,
+        method: "PUT",
+        data: {
+            title: chapter.title,
+            content: chapter.content,
+            story_id: chapter.story_id,
+            start: chapter.start ? 1 : 0,
+            image: base64Image, // Include the Base64-encoded image
+        },
+    });
+
     return { data, error, isLoading };
 }
 

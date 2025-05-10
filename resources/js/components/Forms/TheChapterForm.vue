@@ -3,25 +3,33 @@ import { defineProps, ref, watch } from "vue";
 
 
 // Define the props and assign them to a local variable.
-const { chapter} = defineProps({
-    chapter: {
-        type: Object,
-        required: true,
-    },
-});
+const chapter = defineModel()
+
+defineEmits(['update'])
 
 console.log(chapter)
 
 </script>
 <template>
-    <form class="chapterForm" href="" @submit.prevent="$emit('update')">
+    <form class="chapterForm" href="" @submit.prevent="$emit('update')" v-if="chapter">
+        <div>
+            <label for="title">Title</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                v-model="chapter.title"
+                required
+            />
+        </div>
         <div>
             <label for="content">Content</label>
             <textarea
                 id="content"
                 name="content"
                 required
-            >{{ chapter.content }}</textarea>
+                v-model="chapter.content"
+            ></textarea>
         </div>
         <div>
             <label for="image">Image</label>

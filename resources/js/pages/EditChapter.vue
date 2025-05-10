@@ -4,6 +4,7 @@ import { ref, watch, inject } from "vue";
 import {
     getChapter,
     getChapterChoices,
+    updateChapter,
     createChoice,
     deleteChoice,
 } from "@/lib/StoriesManager.js";
@@ -16,6 +17,7 @@ const chapterId = route.params.chapterId;
 const storyId = route.params.storyId;
 
 const chapter = ref({
+    title: "",
     content: "",
     image: null,
 });
@@ -58,6 +60,22 @@ function createDummyChoice() {
     });
 }
 
+function updateChapterInfo(){
+    const { data, error, loading } = updateChapter(chapterId, chapter.value);
+
+    watch(data, (newData) => {
+        chapter.value = newData;
+        console.log("chapter updated", newData);
+        
+    });
+    watch(error, (newError) => {
+        console.log(newError);
+        if (newError) {
+            alert("Error updating story: " + newError.data.message);
+        }
+    });
+}
+
 function deleteChoiceClick(choiceId) {
     if (confirm("Are you sure you want to delete this Choice ?")) {
         const { data, error, loading } = deleteChoice(choiceId);
@@ -90,7 +108,7 @@ watch(choicesData, (newChoices) => {
 <template>
     <div id="chaptersInfo">
         <h2>Chapters</h2>
-        <TheChapterForm :chapter="chapter" />
+        <TheChapterForm v-model="chapter" @update="updateChapterInfo"/>
     </div>
     <ChoicesList
         :choices="choices"

@@ -20,7 +20,7 @@ defineEmits(['delete','createStory'])
     <tr v-for="story in stories">
         <td>{{story.title}}</td>
         <td>
-            <a :href="'#game-' + story.id">Play</a>
+            <RouterLink :to="'/game/' + story.id">Play</RouterLink>
             <RouterLink :to="'/edit/' + story.id">Edit</RouterLink>
             <!--<a :href="'#edit-' + story.id">Edit</a>-->
             <a href="" @click.prevent="$emit('delete',story.id)">Delete</a>

@@ -4,7 +4,8 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "serve": "start php artisan serve && npm run dev"
+        "serve": "start php artisan serve && npm run dev",
+        "clear-cache": "php artisan optimize:clear"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

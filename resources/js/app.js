@@ -15,7 +15,7 @@ const routes = [
     { path: "/edit/:storyId/:chapterId", component: EditChapter },
     { path: "/edit/:storyId/:chapterId/:choiceId", component: EditChoice },
     { path: "/create", component: EditStory },
-    { path: "/game", component: Game },
+    { path: "/game/:storyId", component: Game },
 ];
 
 const router = createRouter({
