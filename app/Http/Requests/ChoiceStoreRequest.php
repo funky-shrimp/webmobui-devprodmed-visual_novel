@@ -24,7 +24,7 @@ class ChoiceStoreRequest extends FormRequest
         return [
             'text' => 'required|string',
             'chapter_id' => 'required|numeric',
-            'next_chapter_id' => 'numeric'
+            'next_chapter_id' => 'nullable|numeric'
         ];
     }
 }

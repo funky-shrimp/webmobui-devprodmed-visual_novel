@@ -34,6 +34,7 @@ export default defineConfig({
         }),
         //tailwindcss(),
     ],
+    /*
     server: {
         proxy: {
             "/api/stories/": {
@@ -43,10 +44,12 @@ export default defineConfig({
             },
         },
     },
+    
     resolve: {
         alias: {
             vue: "vue/dist/vue.esm-bundler.js",
             "@": path.resolve(__dirname, "resources"),
         },
     },
+    */
 });
