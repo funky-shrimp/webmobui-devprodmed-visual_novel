@@ -22,7 +22,7 @@ defineEmits(['deleteChapter','createChapter'])
     <table>
         <tr v-for="chapter in chapters">
             <td>{{ chapter.id }}</td>
-            <td>{{ chapter.content }}</td>
+            <td>{{ chapter.title }}</td>
             <td>
                 <RouterLink :to="'/edit/' + storyId + '/'+chapter.id">Edit</RouterLink>
                 <a href="" @click.prevent="$emit('deleteChapter',chapter.id)">Delete</a>

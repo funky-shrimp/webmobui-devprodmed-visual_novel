@@ -64,12 +64,9 @@ function updateChapterInfo(){
     const { data, error, loading } = updateChapter(chapterId, chapter.value);
 
     watch(data, (newData) => {
-        chapter.value = newData;
-        console.log("chapter updated", newData);
-        
+        chapter.value = newData;        
     });
     watch(error, (newError) => {
-        console.log(newError);
         if (newError) {
             alert("Error updating story: " + newError.data.message);
         }
