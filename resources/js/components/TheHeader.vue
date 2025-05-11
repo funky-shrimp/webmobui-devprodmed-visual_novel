@@ -2,7 +2,6 @@
 <template>
     <ul>
         <li><a href="/">Home</a></li>
-        <li class="admin"><a href="admin">Admin</a></li>
     </ul>
 </template>
 <style scoped>

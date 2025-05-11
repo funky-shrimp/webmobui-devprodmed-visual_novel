@@ -51,25 +51,18 @@ function createDummyChoice() {
 
     watch(dummyChoiceData, (newDummyChoiceData) => {
         if (newDummyChoiceData) {
-            console.log(
-                "Dummy chapter created successfully:",
-                newDummyChoiceData
-            );
             choices.value.push(newDummyChoiceData);
         }
     });
 }
 
-function updateChapterInfo(){
+function updateChapterInfo() {
     const { data, error, loading } = updateChapter(chapterId, chapter.value);
 
     watch(data, (newData) => {
         chapter.value = newData;
-        console.log("chapter updated", newData);
-        
     });
     watch(error, (newError) => {
-        console.log(newError);
         if (newError) {
             alert("Error updating story: " + newError.data.message);
         }
@@ -107,8 +100,12 @@ watch(choicesData, (newChoices) => {
 </script>
 <template>
     <div id="chaptersInfo">
-        <h2>Chapters</h2>
-        <TheChapterForm v-model="chapter" @update="updateChapterInfo"/>
+        <div class="titlenav">
+            <!--go back to edit/storyId-->
+            <RouterLink :to="`/edit/${storyId}`" class="previous">&lt;</RouterLink>
+            <h1>Chapter Info</h1>
+        </div>
+        <TheChapterForm v-model="chapter" @update="updateChapterInfo" />
     </div>
     <ChoicesList
         :choices="choices"

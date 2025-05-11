@@ -2,6 +2,9 @@ import { createApp } from "vue";
 import { createMemoryHistory, createRouter } from "vue-router";
 import App from "./App.vue";
 
+// Import the CSS files
+import "../css/stylesheet.css";
+
 import Home from "./pages/Home.vue";
 import EditStory from "./pages/EditStory.vue";
 import EditChapter from "./pages/EditChapter.vue";

@@ -17,7 +17,7 @@ const { choices } = defineProps({
 defineEmits(["deleteChoice", "createChoice"]);
 </script>
 <template>
-    <h1>Choices List</h1>
+    <h2>Choices List</h2>
     <button id="createChoice" @click.prevent="$emit('createChoice')">
         Create a Choice
     </button>
@@ -26,27 +26,15 @@ defineEmits(["deleteChoice", "createChoice"]);
             <td>{{ choice.text }}</td>
             <td>{{ choice.next_chapter_id }}</td>
             <td>
-                <RouterLink
+                <RouterLink class="edit"
                     :to="'/edit/' + storyId + '/' + chapterId + '/' + choice.id"
                     >Edit</RouterLink
                 >
-                <a href="" @click.prevent="$emit('deleteChoice',choice.id)">Delete</a>
+                <a class="delete" href="" @click.prevent="$emit('deleteChoice',choice.id)">Delete</a>
             </td>
         </tr>
     </table>
 </template>
 <style scoped>
-table {
-    margin: auto;
-    width: 70%;
-}
 
-td {
-    margin: 0;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: rgb(226, 226, 226);
-}
 </style>

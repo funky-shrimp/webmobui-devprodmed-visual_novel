@@ -10,6 +10,7 @@ import {
 
 import TheStoryForm from "@/components/Forms/TheStoryForm.vue";
 import ChaptersList from "../components/ChaptersList.vue";
+import { RouterLink } from "vue-router";
 
 const route = inject("route");
 const storyId = route.params.storyId;
@@ -64,9 +65,14 @@ function updateStoryInfo() {
 }
 
 function createDummyChapter() {
+
+    let tempId = + storyId;
     const dummyChapter = {
-        content: "Dummy Chapter",
-        story_id: storyId,
+        title: "Dummy Chapter",
+        content: "this is a dummy chapter",
+        image: null,
+        story_id: tempId,
+        start: false,
     };
 
     const {
@@ -110,7 +116,11 @@ watch(chaptersData, (newData) => {
 });
 </script>
 <template>
-    <h1>Edit Story</h1>
+    <div class="titlenav">
+        <RouterLink to="/" class="previous">&lt;</RouterLink>
+        <h1>Edit Story</h1>
+    </div>
+    
     <div id="storyInfo">
         <h2>Story Info</h2>
         <TheStoryForm v-model="story" @update="updateStoryInfo" />
@@ -121,4 +131,17 @@ watch(chaptersData, (newData) => {
         @deleteChapter="deleteChapterClick"
     />
 </template>
-<style scoped></style>
+
+<style scoped>
+.previous {
+    text-decoration: none;
+    font-size: 24px;
+    margin-right: 10px;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.previous:hover {
+    color: #0056b3;
+}
+</style>
