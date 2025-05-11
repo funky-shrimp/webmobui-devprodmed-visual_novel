@@ -17,7 +17,7 @@ defineEmits(['deleteChapter','createChapter'])
 
 </script>
 <template>
-    <h1>Chapters List</h1>
+    <h2>Chapters List</h2>
     <button id="createChapter" @click.prevent="$emit('createChapter')">Create a Chapter</button>
     <table>
         <tr v-for="chapter in chapters">

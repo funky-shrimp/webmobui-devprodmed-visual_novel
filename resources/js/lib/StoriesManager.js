@@ -64,7 +64,13 @@ export function createChapter(chapter) {
     const { data, error, isLoading } = useFetchJson({
         url: "/api/chapters",
         method: "POST",
-        data: { content: chapter.content, story_id: chapter.story_id },
+        data: {
+            title: chapter.title,
+            content: chapter.content,
+            image: chapter.image,
+            story_id: chapter.story_id,
+            start: chapter.start,
+        },
     });
     return { data, error, isLoading };
 }

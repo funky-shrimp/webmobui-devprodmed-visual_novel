@@ -1,7 +1,11 @@
 <script setup>
 import { ref, watch, inject, computed } from "vue";
 import TheChoiceForm from "@/components/Forms/TheChoiceForm.vue";
-import { getChoice, getStoryChapters, updateChoice } from "@/lib/StoriesManager.js";
+import {
+    getChoice,
+    getStoryChapters,
+    updateChoice,
+} from "@/lib/StoriesManager.js";
 
 const route = inject("route");
 const storyId = route.params.storyId;
@@ -49,14 +53,19 @@ watch(choiceData, (newChoice) => {
 
 watch(availableChaptersData, (newAvailableChapters) => {
     if (newAvailableChapters) {
-        availableChapters.value = newAvailableChapters
+        availableChapters.value = newAvailableChapters;
     }
 });
-
-
 </script>
 <template>
-    <h1>Edit Choice</h1>
-    <TheChoiceForm :choice="choice" :availableChapters="availableChapters" @update="updateChoiceInfo" />
+    <div class="titlenav">
+        <RouterLink :to="`/edit/${storyId}/${chapterId}`" class="previous">&lt;</RouterLink>
+        <h1>Edit Choice</h1>
+    </div>
+    <TheChoiceForm
+        :choice="choice"
+        :availableChapters="availableChapters"
+        @update="updateChoiceInfo"
+    />
 </template>
 <style scoped></style>

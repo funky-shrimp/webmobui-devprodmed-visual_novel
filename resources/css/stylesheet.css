@@ -169,3 +169,25 @@ h1,h2{
     text-align: center;
     color: #333;
 }
+
+.titlenav {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titlenav h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+}
+
+.previous {
+    justify-self: flex-start;
+    text-decoration: none;
+    color: #000000!important;
+    font-size: 18px;
+}

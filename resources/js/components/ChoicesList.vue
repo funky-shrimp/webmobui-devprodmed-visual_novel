@@ -17,7 +17,7 @@ const { choices } = defineProps({
 defineEmits(["deleteChoice", "createChoice"]);
 </script>
 <template>
-    <h1>Choices List</h1>
+    <h2>Choices List</h2>
     <button id="createChoice" @click.prevent="$emit('createChoice')">
         Create a Choice
     </button>
