@@ -25,6 +25,10 @@ li a {
     text-decoration: none;
 }
 
+li.admin{
+    float:right;
+}
+
 li a:hover:not(.active) {
     background-color: #111;
 }
