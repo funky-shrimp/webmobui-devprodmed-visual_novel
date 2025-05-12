@@ -20,7 +20,15 @@ export function getStoryChapters(id) {
 }
 
 export function deleteStory(id) {
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/stories/" + id,
         method: "DELETE",
     });
@@ -28,8 +36,15 @@ export function deleteStory(id) {
 }
 
 export function updateStory(id, story) {
-    console.log(story);
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/stories/" + id,
         method: "PUT",
         data: { title: story.title, summary: story.summary },
@@ -38,7 +53,15 @@ export function updateStory(id, story) {
 }
 
 export function createStory(story) {
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/stories",
         method: "POST",
         data: { title: story.title, summary: story.summary },
@@ -61,7 +84,15 @@ export function getChapterChoices(id) {
 }
 
 export function createChapter(chapter) {
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/chapters",
         method: "POST",
         data: {
@@ -76,7 +107,15 @@ export function createChapter(chapter) {
 }
 
 export function deleteChapter(id) {
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/chapters/" + id,
         method: "DELETE",
     });
@@ -106,8 +145,16 @@ export async function updateChapter(id, chapter) {
             reader.readAsDataURL(chapter.image); // Convert the image to Base64
         });
     }
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
 
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: `/api/chapters/${id}`,
         method: "PUT",
         data: {
@@ -130,7 +177,16 @@ export function getChoice(id) {
 }
 
 export function createChoice(choice) {
+//use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
+
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/choices",
         method: "POST",
         data: {
@@ -143,7 +199,16 @@ export function createChoice(choice) {
 }
 
 export function deleteChoice(id) {
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
+
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/choices/" + id,
         method: "DELETE",
     });
@@ -154,7 +219,15 @@ export function updateChoice(id, choice) {
     if(choice.next_chapter_id === "") {
         choice.next_chapter_id = null;
     }
+    //use the token in the header from meta head
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+    if (!token) {
+        throw new Error("CSRF token not found");
+    }
     const { data, error, isLoading } = useFetchJson({
+        headers: {
+            "X-CSRF-TOKEN": token,
+        },
         url: "/api/choices/" + id,
         method: "PUT",
         data: {
