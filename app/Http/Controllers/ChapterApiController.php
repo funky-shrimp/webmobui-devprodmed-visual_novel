@@ -10,16 +10,30 @@ use Illuminate\Http\Request;
 class ChapterApiController extends Controller
 {
 
+    /**
+     * Return all chapters.
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function getChapters()
     {
         return response()->json(Chapter::all());
     }
 
+    /**
+     * Return a chapter by his ID.
+     * @param $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function getChapter($id)
     {
         return response()->json(Chapter::findOrFail($id));
     }
 
+    /**
+     * Return all choices by chapter ID.
+     * @param $chapter_id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function getChoicesByChapter($chapter_id)
     {
         return response()->json(Choice::where(
@@ -28,6 +42,11 @@ class ChapterApiController extends Controller
         )->get());
     }
 
+    /**
+     * Create a new chapter.
+     * @param \App\Http\Requests\ChapterStoreRequest $request
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function createChapter(ChapterStoreRequest $request)
     {
         $data = $request->validated();
@@ -42,6 +61,12 @@ class ChapterApiController extends Controller
         return response()->json($chapter, 201);
     }
 
+    /**
+     * Update a chapter.
+     * @param \App\Http\Requests\ChapterUpdateRequest $request
+     * @param $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function updateChapter(ChapterUpdateRequest $request, $id)
     {
         $chapter = Chapter::findOrFail($id);
@@ -72,6 +97,11 @@ class ChapterApiController extends Controller
         return response()->json($chapter);
     }
 
+    /**
+     * Delete a chapter.
+     * @param $id
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
     public function deleteChapter($id)
     {
         Chapter::findOrFail($id)->delete();

@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Story extends Model
 {
     /**
-     * Les attributs qui sont assignables en masse
+     * Mass assignable attributes
      * @var array
      */
     protected $fillable = ['title','summary'];
 
-    //Une histoire a plusieurs chapitres
+    //A story has many chapters (1.N)
     public function chapters(){
         return $this->hasMany(Chapter::class);
     }
