@@ -173,8 +173,6 @@ http://127.0.0.1:8000/api
 | Parameter   | Type     | Description                       |
 | :---------- | :------- | :-------------------------------- |
 | `id`        | `string` | **Required**. Id of story to delete |
-| `content`   | `string` | **Required**. Content of the story |
-| `story_id`  | `integer`| **Required**. Id of the story     |
 
 ### Chapters
 
@@ -353,9 +351,6 @@ http://127.0.0.1:8000/api
 | Parameter   | Type     | Description                       |
 | :---------- | :------- | :-------------------------------- |
 | `id`        | `string` | **Required**. Id of choice to delete |
-| `content`   | `string` | **Required**. Content of the choice |
-| `story_id`  | `integer`| **Required**. Id of the story     |
-
 
 
 ## Further Improvment
