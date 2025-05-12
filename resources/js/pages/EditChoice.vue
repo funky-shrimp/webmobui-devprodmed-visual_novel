@@ -18,7 +18,7 @@ const {
     data: choiceData,
     error: choiceError,
     loading: choiceLoading,
-} = getChoice(chapterId);
+} = getChoice(choiceId);
 
 //Array of available chapters for the choice next_chapter_id
 const availableChapters = ref([]);

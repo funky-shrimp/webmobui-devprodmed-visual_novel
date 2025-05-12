@@ -42,7 +42,7 @@ defineEmits(["update"]);
                     :value="chapter.id"
                     
                 >
-                    {{ chapter.content }}
+                    {{ chapter.title }}
                 </option>
             </select>
         </div>

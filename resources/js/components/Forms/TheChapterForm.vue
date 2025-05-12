@@ -22,6 +22,16 @@ console.log(chapter)
             />
         </div>
         <div>
+            <label for="start">Is Start</label>
+            <input
+                type="checkbox"
+                id="start"
+                name="start"
+                v-model="chapter.start"
+                :checked="chapter.start"
+            />
+        </div>
+        <div>
             <label for="content">Content</label>
             <textarea
                 id="content"
