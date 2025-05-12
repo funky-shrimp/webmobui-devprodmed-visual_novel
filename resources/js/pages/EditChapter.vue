@@ -36,6 +36,10 @@ const {
     loading: choicesLoading,
 } = getChapterChoices(chapterId);
 
+/**
+ * Function to create a new choice
+ * The choice is created with a dummy text and the current chapter ID
+ */
 function createDummyChoice() {
     const dummyChoice = {
         text: "Dummy Choice",
@@ -49,6 +53,7 @@ function createDummyChoice() {
         loading: dummyChoiceLoading,
     } = createChoice(dummyChoice);
 
+    //Append the new choice to the choices array
     watch(dummyChoiceData, (newDummyChoiceData) => {
         if (newDummyChoiceData) {
             choices.value.push(newDummyChoiceData);

@@ -2,16 +2,30 @@ import { useFetchJson } from "@/composables/useFetchJson";
 
 /* ___ STORIES ___ */
 
+/**
+ * Retrieves all stories.
+ * @returns { data, error, isLoading }
+ */
 export function getStories() {
     const { data, error, isLoading } = useFetchJson("/api/stories");
     return { data, error, isLoading };
 }
 
+/**
+ * Retrieves a specific story by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function getStory(id) {
     const { data, error, isLoading } = useFetchJson("/api/stories/" + id);
     return { data, error, isLoading };
 }
 
+/**
+ * Retrieves all chapters of a specific story by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function getStoryChapters(id) {
     const { data, error, isLoading } = useFetchJson(
         "/api/stories/" + id + "/chapters"
@@ -19,6 +33,11 @@ export function getStoryChapters(id) {
     return { data, error, isLoading };
 }
 
+/**
+ * Deletes a specific story by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function deleteStory(id) {
     const { data, error, isLoading } = useFetchJson({
         url: "/api/stories/" + id,
@@ -27,6 +46,12 @@ export function deleteStory(id) {
     return { data, error, isLoading };
 }
 
+/**
+ * Updates a specific story by its ID.
+ * @param number id 
+ * @param object story 
+ * @returns 
+ */
 export function updateStory(id, story) {
     console.log(story);
     const { data, error, isLoading } = useFetchJson({
@@ -37,6 +62,11 @@ export function updateStory(id, story) {
     return { data, error, isLoading };
 }
 
+/**
+ * Creates a new story.
+ * @param object story
+ * @returns 
+ */
 export function createStory(story) {
     const { data, error, isLoading } = useFetchJson({
         url: "/api/stories",
@@ -48,11 +78,21 @@ export function createStory(story) {
 
 /* ___ CHAPTERS ___ */
 
+/**
+ * Retrieves a specific chapter by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function getChapter(id) {
     const { data, error, isLoading } = useFetchJson("/api/chapters/" + id);
     return { data, error, isLoading };
 }
 
+/**
+ * Retrieves choices of a specific chapter by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function getChapterChoices(id) {
     const { data, error, isLoading } = useFetchJson(
         "/api/chapters/" + id + "/choices"
@@ -60,6 +100,11 @@ export function getChapterChoices(id) {
     return { data, error, isLoading };
 }
 
+/**
+ * Creates a new chapter.
+ * @param object chapter 
+ * @returns 
+ */
 export function createChapter(chapter) {
     const { data, error, isLoading } = useFetchJson({
         url: "/api/chapters",
@@ -75,6 +120,11 @@ export function createChapter(chapter) {
     return { data, error, isLoading };
 }
 
+/**
+ * Deletes a specific chapter by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function deleteChapter(id) {
     const { data, error, isLoading } = useFetchJson({
         url: "/api/chapters/" + id,
@@ -83,18 +133,12 @@ export function deleteChapter(id) {
     return { data, error, isLoading };
 }
 
-/*
-export function updateStory(id, story) {
-    console.log(story);
-    const { data, error, isLoading } = useFetchJson({
-        url: "/api/stories/" + id,
-        method: "PUT",
-        data: { title: story.title, summary: story.summary },
-    });
-    return { data, error, isLoading };
-}
-*/
-
+/**
+ * Updates a specific chapter by its ID and the new chapter data.
+ * @param number id 
+ * @param object chapter 
+ * @returns 
+ */
 export async function updateChapter(id, chapter) {
     let base64Image = null;
 
@@ -124,11 +168,21 @@ export async function updateChapter(id, chapter) {
 
 /* ___ CHOICES ___ */
 
+/**
+ * Retrieves a specific choice by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function getChoice(id) {
     const { data, error, isLoading } = useFetchJson("/api/choices/" + id);
     return { data, error, isLoading };
 }
 
+/**
+ * Creates a new choice.
+ * @param object choice 
+ * @returns 
+ */
 export function createChoice(choice) {
     const { data, error, isLoading } = useFetchJson({
         url: "/api/choices",
@@ -142,6 +196,11 @@ export function createChoice(choice) {
     return { data, error, isLoading };
 }
 
+/**
+ * Deletes a specific choice by its ID.
+ * @param number id 
+ * @returns 
+ */
 export function deleteChoice(id) {
     const { data, error, isLoading } = useFetchJson({
         url: "/api/choices/" + id,
@@ -150,6 +209,12 @@ export function deleteChoice(id) {
     return { data, error, isLoading };
 }
 
+/**
+ * Updates a specific choice by its ID and the new choice data.
+ * @param number id 
+ * @param object choice 
+ * @returns 
+ */
 export function updateChoice(id, choice) {
     if(choice.next_chapter_id === "") {
         choice.next_chapter_id = null;
