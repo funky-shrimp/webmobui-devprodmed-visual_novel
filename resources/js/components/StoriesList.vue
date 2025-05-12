@@ -19,7 +19,7 @@ defineEmits(["delete", "createStory"]);
     <table>
         <tr v-for="story in stories">
             <td>{{ story.title }}</td>
-            <td>
+            <td class="controls">
                 <RouterLink class="play":to="'/game/' + story.id">play</RouterLink>
 
 
