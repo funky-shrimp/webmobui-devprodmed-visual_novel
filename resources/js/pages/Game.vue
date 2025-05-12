@@ -65,14 +65,14 @@ watch(currentChapter, (newChapter) => {
 <template>
     <div v-if="chaptersLoading" id="loader">Loading...</div>
     <div v-else-if="currentChapter && !end">
-        <h1>{{ currentChapter.title }}</h1>
-        <p class="chaptersContent">{{ currentChapter.content }}</p>
         <div class="chaptersImage" v-if="currentChapter.image">
             <img
                 :src="`/storage/${currentChapter.image}`"
                 alt="Chapter Image"
             />
         </div>
+        <h1>{{ currentChapter.title }}</h1>
+        <p class="chaptersContent">{{ currentChapter.content }}</p>
         <div class="choices">
             <ul>
                 <li v-for="choice in choices" :key="choice.id">
@@ -92,7 +92,10 @@ watch(currentChapter, (newChapter) => {
 </template>
 <style scoped>
 img {
-    width: 100px;
+    width: 20%;
+    margin:auto;
+    margin-top:50px;
+    display: block;
 }
 .chaptersContent {
     font-size: 1.2em;

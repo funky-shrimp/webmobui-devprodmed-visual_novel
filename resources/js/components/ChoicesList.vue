@@ -25,7 +25,7 @@ defineEmits(["deleteChoice", "createChoice"]);
         <tr v-for="choice in choices">
             <td>{{ choice.text }}</td>
             <td>{{ choice.next_chapter_id }}</td>
-            <td>
+            <td class="controls">
                 <RouterLink class="edit"
                     :to="'/edit/' + storyId + '/' + chapterId + '/' + choice.id"
                     >Edit</RouterLink
