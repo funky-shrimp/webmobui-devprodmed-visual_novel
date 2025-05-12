@@ -20,6 +20,7 @@ const {
     loading: choiceLoading,
 } = getChoice(chapterId);
 
+//Array of available chapters for the choice next_chapter_id
 const availableChapters = ref([]);
 
 const {

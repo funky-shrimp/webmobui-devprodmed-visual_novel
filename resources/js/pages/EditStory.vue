@@ -64,6 +64,10 @@ function updateStoryInfo() {
     });
 }
 
+/**
+ * Function to create a new chapter
+ * The chapter is created with a dummy text, title and the current story ID
+ */
 function createDummyChapter() {
 
     let tempId = + storyId;

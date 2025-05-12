@@ -1,6 +1,9 @@
 <script setup>
 import { ref, defineProps, defineEmits, inject } from "vue";
 
+//Retrieve the storyId and chapterId from the route
+//This is used to create the link to edit the chapter
+//and to delete the chapter
 const route = inject("route");
 const storyId = route.params.storyId;
 const chapterId = route.params.chapterId;

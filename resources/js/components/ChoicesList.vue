@@ -1,11 +1,11 @@
 <script setup>
 import { ref, defineProps, defineEmits, inject } from "vue";
 
+// Retrieve the storyId and chapterId from the route
+// This is used for the API to specify which story and chapter the choices belong to
 const route = inject("route");
-
 const storyId = route.params.storyId;
 const chapterId = route.params.chapterId;
-const choiceId = route.params.choiceId;
 
 const { choices } = defineProps({
     choices: {

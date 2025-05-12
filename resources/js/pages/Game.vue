@@ -21,6 +21,10 @@ const {
     loading: chaptersLoading,
 } = getStoryChapters(storyId);
 
+/**
+ * Function to set the current chapter for the dynamic state
+ * @param {string} chapterId - The ID of the chapter to set as current
+ */
 function setCurrentChapter(chapterId) {
     console.log("Setting current chapter to:", chapterId);
     if (chapterId == null) {
@@ -36,14 +40,14 @@ function setCurrentChapter(chapterId) {
     }
 }
 
-//Charge le premier chapitre dès qu'on reçoit tous les chapitres
+//Load the first chapter once the chapters are loaded
 watch(chaptersData, (newChapters) => {
     chapters.value = newChapters;
     console.log("Chapters loaded:", chapters.value);
     currentChapter.value = getStartingChapter(chapters.value);
 });
 
-//Change les choix en fonction du chapitre
+//Set choices for the current chapter once it's loaded
 watch(currentChapter, (newChapter) => {
     console.log("Current chapter changed:", newChapter);
     const {

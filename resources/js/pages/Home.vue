@@ -29,6 +29,11 @@ function clickDelete(id) {
     }
 }
 
+/**
+ * Function to create a dummy story
+ * The title and summary are hardcoded for easier implementation
+ * @returns {void}
+ */
 function createDummyStory() {
     const dummyStory = {
         title: "Dummy Story",

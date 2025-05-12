@@ -13,12 +13,12 @@ class Chapter extends Model
     protected $fillable = ['title','content','image','story_id','start'];
 
 
-    //Un chapitre n'appartient qu'à une histoire
+    //A chapter belongs to a story (1.1)
     public function story(){
         return $this->belongsTo(Story::class);
     }
 
-    //Un chapitre à plusieurs choix
+    //A chapter has many choices (0.N)
     public function choices(){
         return $this->hasMany(Choice::class);
     }

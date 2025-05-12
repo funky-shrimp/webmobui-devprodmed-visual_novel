@@ -2,7 +2,6 @@
 import { defineProps, ref, watch } from "vue";
 
 
-// Define the props and assign them to a local variable.
 const chapter = defineModel()
 
 defineEmits(['update'])
