@@ -61,14 +61,14 @@ watch(currentChapter, (newChapter) => {
 <template>
     <div v-if="chaptersLoading" id="loader">Loading...</div>
     <div v-else-if="currentChapter && !end">
-        <h1>{{ currentChapter.title }}</h1>
-        <p class="chaptersContent">{{ currentChapter.content }}</p>
         <div class="chaptersImage" v-if="currentChapter.image">
             <img
                 :src="`/storage/${currentChapter.image}`"
                 alt="Chapter Image"
             />
         </div>
+        <h1>{{ currentChapter.title }}</h1>
+        <p class="chaptersContent">{{ currentChapter.content }}</p>
         <div class="choices">
             <ul>
                 <li v-for="choice in choices" :key="choice.id">
@@ -80,14 +80,63 @@ watch(currentChapter, (newChapter) => {
         </div>
     </div>
 
-    <div v-if="end">
+    <div v-if="end" id="end">
         <h1>End</h1>
         <p>Thank you for playing!</p>
         <RouterLink :to="'/'">Go back home now !!!</RouterLink>
     </div>
 </template>
 <style scoped>
-    img{
-        width:100px;
-    }
+img {
+    width: 20%;
+    margin:auto;
+    margin-top:50px;
+    display: block;
+}
+.chaptersContent {
+    font-size: 1.2em;
+    margin: auto;
+    width: 300px;
+    text-align: justify;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+li{
+    width:300px;
+}
+
+li button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+li button:hover {
+    background-color: #0056b3;
+}
+
+/* align end*/
+
+#end {
+    text-align: center;
+    margin-top: 20px;
+}
+#end a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.5em;
+}
+
 </style>

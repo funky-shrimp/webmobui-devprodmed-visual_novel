@@ -23,6 +23,11 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+td.controls{
+    display: flex;
+    justify-content: flex-end;
+}
+
 td a {
     text-decoration: none;
     padding: 8px 16px;
