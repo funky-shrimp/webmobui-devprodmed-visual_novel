@@ -24,7 +24,7 @@ class ChoiceUpdateRequest extends FormRequest
         return [
             'text' => 'string',
             'chapter_id' => 'numeric',
-            'next_chapter_id' => 'numeric'
+            'next_chapter_id' => 'nullable|numeric'
         ];
     }
 }

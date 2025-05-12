@@ -1,12 +1,5 @@
 <script setup>
 
-const { mode } = defineProps({
-    mode: {
-        type: String,
-        default: "create",
-    },
-});
-
 const story = defineModel();
 
 defineEmits(["update"]);
@@ -33,8 +26,7 @@ defineEmits(["update"]);
             ></textarea>
         </div>
         <div>
-            <input v-if="mode=='update'" type="submit" value="Save" />
-            <input v-if="mode=='create'" type="submit" value="Create" />
+            <input type="submit" value="Save" />
         </div>
     </form>
 </template>

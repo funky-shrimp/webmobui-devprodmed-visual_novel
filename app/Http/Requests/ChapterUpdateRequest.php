@@ -22,9 +22,11 @@ class ChapterUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => 'string|max:50',
             'content' => 'string',
-            'image' => 'nullable|image',
-            'story_id' => 'numeric'
+            'story_id' => 'numeric',
+            'start' => 'boolean',
+            'image' => 'nullable|string',
         ];
     }
 }

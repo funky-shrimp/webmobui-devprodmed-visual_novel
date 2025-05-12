@@ -10,7 +10,7 @@ class Chapter extends Model
      * Les attributs qui sont assignables en masse
      * @var array
      */
-    protected $fillable = ['content','image','story_id'];
+    protected $fillable = ['title','content','image','story_id','start'];
 
 
     //Un chapitre n'appartient qu'à une histoire
